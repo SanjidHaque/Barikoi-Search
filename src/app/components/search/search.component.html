@@ -1,0 +1,212 @@
+<div class="row">
+  <div class="col-xl-6" style="height: 100vh; overflow: auto">
+
+    <div class="row"
+         style="font-family: Roboto, sans-serif;
+         font-weight: 600; font-size: 30px; padding-top: 35px; padding-left: 15px;">
+      <div class="col-xl-12">
+
+        Bari<span style="color: #2ddbac">koi</span>
+
+      </div>
+    </div>
+
+
+    <div class="row" style="padding-left: 40px; padding-top: 30px;">
+      <div class="col-xl-12">
+
+        <mat-form-field style="width: 80%;" appearance="outline">
+          <input matInput
+                 type="text"
+                 [(ngModel)]="searchText"
+                 placeholder="Search Location."
+                 [matAutocomplete]="auto"
+                 [formControl]="searchLocationFormControl">
+
+          <button mat-button
+                  style="outline: 0"
+                  *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear"
+                  (click)="resetForm()">
+            <mat-icon>close</mat-icon>
+          </button>
+
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+            <ng-container *ngIf="!isLoading" multiple>
+
+              <mat-option
+                (onSelectionChange)="setSelectedLocation(location)"
+                *ngFor="let location of locations; let i = index" [value]="location.address">
+
+
+                <div class="row">
+
+                  <div class="col-xl-1" >
+
+                    <i
+                      style="
+                      color: rgba(0,0,0,.87);
+                      font-size: 20px;
+                      opacity: 1;
+                      margin-top: 8px;"
+                      class="fas fa-map-marker-alt"></i>
+
+                  </div>
+
+                  <div class="col-xl-11">
+
+                    <div class="row" style="font-weight: 300; font-size: 17px;">
+                      <div class="col-xl-12">
+                        {{ location.address }}
+                      </div>
+                    </div>
+
+
+
+                    <div class="row" style="font-weight: 300; font-size: 15px; padding-top: 5px">
+                      <div class="col-xl-12">
+                        {{ location.area }}  {{ location.city }}
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+
+
+
+              </mat-option>
+
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field>
+
+      </div>
+    </div>
+
+    <div class="row"
+         style="padding-left: 30px;"
+         *ngIf="selectedLocation !== null">
+      <div class="offset-xl-1 col-xl-9">
+
+
+        <div class="row"
+             style="
+         word-break: break-word;
+         padding-top: 39px;
+         font-weight: 600;
+         color: #2a2e43;
+         font-size: 30px;
+         font-family: Roboto, sans-serif;">
+
+          <div class="col-xl-12">
+
+            {{ selectedLocation.address }}
+
+          </div>
+        </div>
+
+        <div class="row"
+             style="font-family: Rubik, sans-serif;
+         color: #181e2c;
+         font-weight: 300;
+         padding-top: 6px;
+         font-size: 18px;">
+          <div class="col-xl-12">
+
+            {{ selectedLocation.area }},  {{ selectedLocation.city }}
+
+          </div>
+        </div>
+
+        <div class="row" style="font-family: Rubik, sans-serif;
+         color: #555;
+         font-weight: 300;
+         padding-top: 10px;
+         font-size: 15px;">
+          <div class="col-xl-12">
+
+            {{ selectedLocation.pType }}
+
+          </div>
+        </div>
+
+        <div class="row" style="color: #aaa;opacity: 65%; padding-top: 8px; font-size: 15px;">
+          <div class="col-xl-12">
+
+            Place Code :  {{ selectedLocation.uCode }}
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class="row"
+         style="padding-left: 50px; padding-top: 40px;"
+         *ngIf="selectedLocation !== null">
+      <div class="col-xl-12">
+
+        <button (click)="getNearbyThings('food')" mat-stroked-button>Food</button>&nbsp;
+        <button (click)="getNearbyThings('bank')" mat-stroked-button>Bank</button>&nbsp;
+        <button (click)="getNearbyThings('healthcare')" mat-stroked-button>Healthcare</button>&nbsp;
+        <button (click)="getNearbyThings('education')" mat-stroked-button>Education</button>&nbsp;
+        <button (click)="getNearbyThings('hotel')" mat-stroked-button>Hotel</button>
+
+      </div>
+    </div>
+
+    <div class="row"
+         *ngIf="nearbyThings.length !== 0"
+         style="padding-left: 35px; padding-top: 40px;">
+      <div class="col-xl-10" style="height: 300px; overflow: auto;">
+
+
+        <div class="row"
+             style="font-family: Rubik, sans-serif;
+             font-size: 16px;
+             font-weight: 700;
+             color: rgba(0,0,0,.87);
+             padding-top: 12px;
+             padding-bottom: 12px;"
+             *ngFor="let nearbyThing of nearbyThings">
+          <div class="col-xl-12">
+
+            {{ nearbyThing.Address }}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-xl-6">
+    <google-map
+      height="100vh"
+      width="100%"
+      [zoom]="zoom"
+      [center]="center">
+      <map-marker
+        *ngFor="let marker of markers"
+        [position]="marker.position"
+        [label]="marker.label"
+        [title]="marker.title"
+        [options]="marker.options"
+      >
+      </map-marker>
+    </google-map>
+  </div>
+
+</div>
+
+
+
+
+

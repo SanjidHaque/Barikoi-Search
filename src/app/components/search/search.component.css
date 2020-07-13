@@ -1,0 +1,23 @@
+mat-option {
+  margin: 1rem 0;
+  height: 80px;
+  overflow: visible;
+  line-height: initial;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+.mat-option i {
+  display: block;
+  font-size: 1.5rem;
+  opacity: 0.6;
+  margin-left: 0.5rem;
+}
+
+.mat-stroked-button {
+  font-weight: 500;
+  color: #1a237e;
+  font-size: 14px;
+  outline: 0;
+}
+
+

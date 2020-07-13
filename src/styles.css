@@ -1,0 +1,15 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+@import '~font-awesome/css/font-awesome.css';
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 12px 2px 19px 2px!important;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: black !important;
+}
+
+.mat-autocomplete-panel {
+  max-height: 400px!important;
+}
