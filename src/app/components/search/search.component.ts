@@ -67,6 +67,8 @@ export class SearchComponent implements OnInit {
 
   setSelectedLocation(location: any) {
     this.selectedLocation = location;
+    this.markers = [];
+
     this.markers.push({
       position: {
         lat: +location.latitude,
