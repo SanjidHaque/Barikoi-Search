@@ -76,8 +76,7 @@ export class SearchComponent implements OnInit {
         color: 'black',
         text: ' '
       },
-      title: location.address,
-      options: {  }
+      title: location.address
     });
 
   }
